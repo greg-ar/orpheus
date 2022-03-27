@@ -2,6 +2,6 @@ All you have to do is create a token to a discord bot and then put that token on
 of a new file called "token.txt" in the "token" folder
 
 
-Dependencies: discord, youtube-dl, pynacl 
+Dependencies: discord, youtube-dl, ffmpeg, pynacl 
 
 It works for Python 3.10.2 
