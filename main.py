@@ -1,15 +1,12 @@
 import discord
 from discord.ext import commands
-import music
+from cogs import cogs_setup
 
 
 def main():
-    cogs = [music]
 
     client = commands.Bot(command_prefix='!', intents = discord.Intents.all())
-
-    for i in range(len(cogs)):
-        cogs[i].setup(client)
+    cogs_setup(client)
 
     token_file = open('token/token.txt','r')
     token = token_file.read()
