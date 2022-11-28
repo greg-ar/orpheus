@@ -6,6 +6,7 @@ from managers.youtube_api_manager import yt_load
 class music(commands.Cog):
     def __init__(self, client):
         self.client = client
+        self.current_voice_channel = None
 
     @commands.command()
     async def join(self,ctx):
@@ -18,7 +19,8 @@ class music(commands.Cog):
                 await voice_channel.connect()
             else: 
                 await ctx.voice_client.move_to(voice_channel)
-            
+                        
+            self.current_voice_channel = voice_channel
             await ctx.guild.change_voice_state(channel=voice_channel, self_mute=False, self_deaf=True)
 
     @commands.command()
@@ -27,6 +29,8 @@ class music(commands.Cog):
         
     @commands.command()
     async def play(self,ctx,url):
+        if ctx.author.voice.channel is not self.current_voice_channel:
+            await self.join(ctx) 
         ctx.voice_client.stop()
         ctx.voice_client.play(await yt_load(url))
 

@@ -9,7 +9,7 @@ def bot():
 
     client = bot_setup()
 
-    print("Orpheus is ready")
+    print("Orpheus is ready, logging in Discord")
     client.run(TOKEN)
 
     print("\nOrpheus Shuting Down")
