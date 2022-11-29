@@ -37,10 +37,10 @@ class music(commands.Cog):
 	@commands.command()
 	async def play(self,ctx,url):
 		if ctx.author.voice.channel is not self.current_voice_channel:
-			#task = asyncio.create_task(self.join(ctx))
-			#await task
+			task = asyncio.create_task(self.join(ctx))
+			await task
 			#await loop.run_in_executor(self.pool, self.join, ctx)
-			ctx.voice_client.loop.run_until_complete(self.join(ctx))
+			#await ctx.voice_client.loop.run_until_complete(self.join(ctx))
 			print("Join task done")
 			#await asyncio.sleep(0.5) #The bot needs to wait for the connection to initialize otherwise it thinks that it isn't connected to VC
 		if self.is_playing :
