@@ -1,6 +1,5 @@
 import asyncio
 import nextcord
-import concurrent.futures
 from nextcord.ext import commands
 from time import sleep
 from managers.youtube_api_manager import yt_load
@@ -12,7 +11,6 @@ class music(commands.Cog):
 		self.current_voice_channel = None
 		self.is_playing = False
 		self.loop = asyncio.get_event_loop()
-		self.pool = concurrent.futures.ThreadPoolExecutor()
 
 	@commands.command()
 	async def join(self,ctx):
@@ -36,13 +34,13 @@ class music(commands.Cog):
 		self.is_playing = False
 		self.current_voice_channel = None
 
-		
 	@commands.command()
 	async def play(self,ctx,url):
 		if ctx.author.voice.channel is not self.current_voice_channel:
 			#task = asyncio.create_task(self.join(ctx))
 			#await task
-			await loop.run_in_executor(pool, self.join, ctx)
+			#await loop.run_in_executor(self.pool, self.join, ctx)
+			ctx.voice_client.loop.run_until_complete(self.join(ctx))
 			print("Join task done")
 			#await asyncio.sleep(0.5) #The bot needs to wait for the connection to initialize otherwise it thinks that it isn't connected to VC
 		if self.is_playing :
