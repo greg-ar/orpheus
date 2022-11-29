@@ -1,5 +1,3 @@
-import asyncio
-
 from config import TOKEN
 from setup import bot_setup
 
