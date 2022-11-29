@@ -1,5 +1,3 @@
-import asyncio
-
 from config import TOKEN
 from setup import bot_setup
 
@@ -9,7 +7,7 @@ def bot():
 
     client = bot_setup()
 
-    print("Orpheus is ready")
+    print("Orpheus is ready, logging in Discord")
     client.run(TOKEN)
 
     print("\nOrpheus Shuting Down")

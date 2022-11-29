@@ -3,10 +3,12 @@ from nextcord.ext import commands
 
 from cogs.setup import cog_setup
 
+from config import PREFIX
+
 def bot_setup():
     intents = nextcord.Intents.default()
     intents.message_content = True
-    client = commands.Bot(command_prefix="!", intents=intents)
+    client = commands.Bot(command_prefix=PREFIX, intents=intents)
 
     @client.event
     async def on_ready():
