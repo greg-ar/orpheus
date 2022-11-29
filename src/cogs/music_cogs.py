@@ -8,7 +8,6 @@ class music(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.current_voice_channel = None
-        self.is_playing = False
 
     @commands.command()
     async def join(self,ctx):
@@ -28,7 +27,6 @@ class music(commands.Cog):
     @commands.command()
     async def leave(self,ctx):
         await ctx.voice_client.disconnect()
-        self.is_playing = False
         self.current_voice_channel = None
 
         
@@ -37,17 +35,14 @@ class music(commands.Cog):
         if ctx.author.voice.channel is not self.current_voice_channel:
             await self.join(ctx)
             await asyncio.sleep(0.5) #The bot needs to wait for the connection to initialize otherwise it thinks that it isn't connected to VC
-        if self.is_playing :
+        if ctx.voice_client.is_playing() :
             ctx.voice_client.stop()
         ctx.voice_client.play(await yt_load(url))
-        self.is_playing = True
 
     @commands.command()
     async def pause(self,ctx):
         await ctx.voice_client.pause()
-        self.is_playing = False
 
     @commands.command()
     async def resume(self,ctx):
         await ctx.voice_client.resume()
-        self.is_playing = True
