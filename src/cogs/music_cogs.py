@@ -1,5 +1,6 @@
 import asyncio
 import nextcord
+import concurrent.futures
 from nextcord.ext import commands
 from time import sleep
 from managers.youtube_api_manager import yt_load
